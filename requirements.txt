@@ -1,1 +1,3 @@
 twill==3.0.1
+beautifulsoup4==4.8.1
+grequests==0.4.0
