@@ -28,8 +28,8 @@ except:
 
 
 try:
-    email = getinput("Gebe deine Email ein: ")
-    password = getpassword("Gebe dein Passwort ein: ")
+    email = getinput("Gib deine Email ein: ")
+    password = getpassword("Gib dein Passwort ein: ")
     log_entry = input("Was soll gepostet werden?: ")
     go('https://www.geocaching.com/my/logs.aspx?s=1')
     fv("1", "UsernameOrEmail", email)
@@ -37,17 +37,24 @@ try:
     submit('0')
     links = showlinks()
     log_list = []
+    i = 0
+    j = 0
     for link in links:
-        if "Visit log" in link.text:
+        if "Log aufrufen" in link.text:
             logs = link.url
             log_list.append(logs)
-    # print(log_list)
-    for log in log_list:
-        go(log)
-        follow("Edit Log")
-        fv("1", "ctl00$ContentBody$LogBookPanel1$uxLogInfo", log_entry)
-        showforms()
-        submit('-2')
+            i += 1
+    print(i, "logeinträge gefunden.")
+    if input("Willst du wirklich fortfahren? [j/n]") == "j":
+        for log in log_list:
+            go(log)
+            follow("Logeintrag bearbeiten")
+            fv("1", "ctl00$ContentBody$LogBookPanel1$uxLogInfo", log_entry)
+            # showforms()
+            submit('-2')
+            j += 1
+            print(j, ". logeintrag geändert.")
+        print(j, "logeinträge geändert.")
 
 except:
     print('Irgendwas ist schief gelaufen.')
