@@ -1,3 +1,4 @@
+from logging import exception
 import os
 import sys
 import configparser
@@ -8,6 +9,7 @@ from threading import Thread
 from urllib.request import urlopen
 # from urllib3 import response
 from twill.commands import *
+import getpass
 
 
 try:
@@ -29,7 +31,7 @@ except:
 
 try:
     email = getinput("Gib deine Email ein: ")
-    password = getpassword("Gib dein Passwort ein: ")
+    password = getpass.getpass("Gib dein Passwort ein: ")
     log_entry = input("Was soll gepostet werden?: ")
     go('https://www.geocaching.com/my/logs.aspx?s=1')
     fv("1", "UsernameOrEmail", email)
@@ -56,5 +58,5 @@ try:
             print(j, ". logeintrag geändert.")
         print(j, "logeinträge geändert.")
 
-except:
-    print('Irgendwas ist schief gelaufen.')
+except OSError as err:
+    print("OS error: {0}".format(err), '\nIrgendwas ist schief gelaufen.')
