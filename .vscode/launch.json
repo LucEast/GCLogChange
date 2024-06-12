@@ -1,0 +1,119 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: main_script",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main_script.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: test_script",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/test_script.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Unittests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/test_script.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                "${workspaceFolder}/src",
+                "-p",
+                "test_*.py"
+            ]
+        },
+        {
+            "name": "Python: Hauptskript mit cutoff-date (dry-run)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/date.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--email",
+                "${input:email}",
+                "--password",
+                "${input:password}",
+                "--cutoff-date",
+                "${input:cutoffDate}",
+                "--dry-run"
+            ]
+        },
+        {
+            "name": "Python: Hauptskript ohne cutoff-date (Wiederherstellung) (dry-run)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/date.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--email",
+                "${input:email}",
+                "--password",
+                "${input:password}",
+                "--restore",
+                "${input:restorePath}"
+            ]
+        },
+        {
+            "name": "Python: Hauptskript mit cutoff-date",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/date.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--email",
+                "${input:email}",
+                "--password",
+                "${input:password}",
+                "--cutoff-date",
+                "${input:cutoffDate}",
+            ]
+        },
+        {
+            "name": "Python: Hauptskript ohne cutoff-date (Wiederherstellung)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/date.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--email",
+                "${input:email}",
+                "--password",
+                "${input:password}",
+                "--restore",
+                "${input:restorePath}"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "email",
+            "type": "promptString",
+            "description": "Gib deine Email ein"
+        },
+        {
+            "id": "password",
+            "type": "promptString",
+            "description": "Gib dein Passwort ein",
+            "password": true
+        },
+        {
+            "id": "cutoffDate",
+            "type": "promptString",
+            "description": "Gib das Stichtdatum ein (dd/mm/yyyy)"
+        },
+        {
+            "id": "restorePath",
+            "type": "promptString",
+            "description": "Pfad zur CSV-Datei zum Wiederherstellen der ursprünglichen Daten"
+        }
+    ]
+}
